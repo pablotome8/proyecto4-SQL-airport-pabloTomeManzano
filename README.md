@@ -82,8 +82,8 @@ erDiagram
 | # | Analytical Objective | Core SQL Features Used | Target Tables |
 |:-:|---|---|---|
 | **1** | Retrieve all flights currently marked as `On Time` | `SELECT`, `WHERE` | `flights` |
-| **2** | Extract high-value bookings (`≥ 1,000,000` monetary units) | Numeric comparison (`>=`) | `bookings` |
-| **3** | Inspect table column metadata dynamically | `information_schema.columns` | `information_schema` |
+| **2** | Extract high-value bookings (`> 1,000,000` monetary units) | Numeric comparison (`>`) | `bookings` |
+| **3** | List all available aircraft model records | Full table scan (`SELECT *`) | `aircrafts_data` |
 | **4** | Identify flights operated by a **Boeing 737** (`aircraft_code = '733'`) | Filtering by foreign key code | `flights` |
 | **5** | Retrieve ticket details for passengers named **Irina** | Case-insensitive prefix match (`ILIKE 'irina %'`) | `tickets` |
 | **6** | Find cities served by **more than one airport** | `COUNT(*)`, `GROUP BY`, `HAVING` | `airports` |
@@ -104,19 +104,18 @@ WHERE f.status = 'On Time';
 ```
 
 ### 2. High-Value Bookings
-Extracts all columns for bookings whose `total_amount` reaches or exceeds `1,000,000`:
+Extracts all columns for bookings whose `total_amount` strictly exceeds `1,000,000`:
 ```sql
 SELECT *
 FROM bookings b
-WHERE b.total_amount >= 1000000;
+WHERE b.total_amount > 1000000;
 ```
 
-### 3. Schema Metadata Inspection
-Queries PostgreSQL's `information_schema` catalog to inspect the structure of the `bookings` table:
+### 3. Available Aircraft Models
+Extracts all columns for all available aircraft models from `aircrafts_data`:
 ```sql
-SELECT c.column_name 
-FROM information_schema."columns" c 
-WHERE c.table_name = 'bookings';
+SELECT *
+FROM aircrafts_data;
 ```
 
 ### 4. Boeing 737 Flight Operations

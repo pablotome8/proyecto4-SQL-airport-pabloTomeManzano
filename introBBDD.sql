@@ -6,13 +6,11 @@ where f.status = 'On Time'
 -- 2. Escribe una consulta que extraiga todas las columnas de la tabla bookings y refleje todas las reservas que han supuesto una cantidad total mayor a 1.000.000 (Unidades monetarias).
 select *
 from bookings b
-where b.total_amount >=1000000
+where b.total_amount > 1000000;
 
 -- 3. Escribe una consulta que extraiga todas las columnas de los datos de los modelos de aviones disponibles (aircraft_data). Puede que os aparezca en alguna actualización como "aircrafts_data", revisad las tablas y elegid la que corresponda.
-
-select c.column_name 
-from information_schema."columns" c 
-where c.table_name = 'bookings'
+select *
+from aircrafts_data;
 
 -- 4. Con el resultado anterior visualizado previamente, escribe una consulta que extraiga los identificadores de vuelo que han volado con un Boeing 737. (Código Modelo Avión = 733)
 select f.flight_id 
